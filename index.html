@@ -1,0 +1,307 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Опитувальник Silver Breeze</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+:root{
+  --bg:#EEF2F4; --surface:#FFFFFF; --ink:#15212B; --muted:#5A6B77; --line:#D3DCE2;
+  --accent:#1E6A85; --accent-ink:#FFFFFF; --accent-soft:#E2EEF3; --star:#A87A22; --field:#F7F9FA;
+  --ok:#2E7D5B;
+  --sans:"Onest", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0F171D; --surface:#17222A; --ink:#E6EDF1; --muted:#9AAAB5; --line:#2A3945;
+    --accent:#6FB6D0; --accent-ink:#0B1419; --accent-soft:#1B3140; --star:#D9A948; --field:#111B22; --ok:#6CC49B;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0F171D; --surface:#17222A; --ink:#E6EDF1; --muted:#9AAAB5; --line:#2A3945;
+  --accent:#6FB6D0; --accent-ink:#0B1419; --accent-soft:#1B3140; --star:#D9A948; --field:#111B22; --ok:#6CC49B;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;padding-inline:16px;padding-block:32px 120px}
+.wrap{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+header{display:flex;flex-direction:column;gap:12px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(24px,4.6vw,34px);line-height:1.2;font-weight:700;margin:0;text-wrap:balance}
+.lead{margin:0;color:var(--muted);max-width:62ch}
+.lead strong{color:var(--star);font-weight:600}
+section{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:24px clamp(16px,4vw,28px);display:flex;flex-direction:column;gap:26px}
+h2{margin:0;font-size:18px;font-weight:600;display:flex;gap:10px;align-items:baseline}
+h2 .n{font-family:var(--mono);font-size:13px;color:var(--muted);font-weight:500}
+.q{display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--line);padding-top:22px}
+h2 + .q{border-top:0;padding-top:0}
+.qt{margin:0;font-weight:600;font-size:16px;display:flex;gap:10px;text-wrap:balance}
+.qt .num{font-family:var(--mono);font-size:13px;color:var(--accent);min-width:1.8em;padding-top:2px;font-weight:500}
+.star{color:var(--star)}
+.hint{margin:0 0 0 calc(1.8em + 10px);color:var(--muted);font-size:13px}
+.opts,.fields{display:flex;flex-direction:column;gap:8px;margin-left:calc(1.8em + 10px)}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1px solid var(--line);border-radius:8px;background:var(--field);cursor:pointer}
+.opt:hover{border-color:var(--accent)}
+.opt input{accent-color:var(--accent);width:17px;height:17px;margin:2px 0 0;flex:none}
+.opt:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.opt-other{display:flex;flex-wrap:wrap;gap:8px;align-items:center;flex:1}
+.opt-other input[type=text]{flex:1;min-width:140px}
+label.f{display:flex;flex-direction:column;gap:5px;font-size:14px;color:var(--muted)}
+input[type=text],textarea{font:inherit;color:var(--ink);background:var(--field);border:1px solid var(--line);border-radius:8px;padding:9px 12px;width:100%}
+textarea{min-height:88px;resize:vertical}
+input[type=text]:focus,textarea:focus,.opt input:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.note{margin:0 0 0 calc(1.8em + 10px);font-size:13px;color:var(--muted);padding:8px 12px;border-left:3px solid var(--accent);background:var(--accent-soft);border-radius:0 6px 6px 0}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px))}
+.bar-in{max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between}
+.progress{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.btns{display:flex;gap:8px;flex-wrap:wrap}
+button{font:inherit;font-weight:600;border-radius:8px;padding:10px 16px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button:disabled{opacity:.55;cursor:progress}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.status{font-size:13px;color:var(--muted);width:100%;margin:0}
+.status.ok{color:var(--ok)}
+footer{color:var(--muted);font-size:13px;text-align:center}
+@media (prefers-reduced-motion:no-preference){.opt,button{transition:border-color .15s,background .15s}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">БЦ Silver Breeze · Дніпровська набережна, Київ</span>
+    <h1>Опитувальник: лендинг «3 місяці оренди безкоштовно»</h1>
+    <p class="lead">Ми готуємо лендинг для компаній, чиї офіси постраждали внаслідок обстрілів. Щоб сторінка точно відображала умови пропозиції, просимо відповісти на питання нижче. Якщо відповіді ще немає, залиште поле порожнім, і ми обговоримо його на зустрічі.</p>
+    <p class="lead">Питання, позначені <strong>★</strong>, найбільше впливають на структуру сторінки. Просимо відповісти на них у першу чергу. Коли закінчите, натисніть «Завантажити PDF» внизу і надішліть файл нам.</p>
+  </header>
+  <form id="form" autocomplete="off"></form>
+  <footer>Дякуємо! Після отримання відповідей підготуємо структуру та тексти сторінки на погодження.</footer>
+</div>
+
+<div class="bar">
+  <div class="bar-in">
+    <span class="progress" id="progress">Заповнено 0 з 11 питань</span>
+    <div class="btns">
+      <button type="button" id="copyBtn">Копіювати відповіді</button>
+      <button type="button" class="primary" id="pdfBtn">Завантажити PDF</button>
+    </div>
+    <p class="status" id="status" hidden></p>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+const SECTIONS = [
+  {title:"Умови пропозиції", qs:[
+    {id:"q1", star:true, t:"Як компанія підтверджує, що її офіс постраждав?", type:"check",
+      opts:["Акт ДСНС або поліції","Фото пошкоджень","Лист від попереднього орендодавця","Без підтвердження, на довірі"], other:true},
+    {id:"q2", star:true, t:"Що відбувається після трьох безкоштовних місяців?", type:"fields",
+      fields:["Мінімальний строк договору оренди","Ставка після пільгового періоду (стандартна чи зі знижкою; якщо зі знижкою, то якою)","Чи потрібен депозит (так/ні, розмір)"]},
+    {id:"q3", t:"Чи є обмеження пропозиції?", type:"fields",
+      fields:["Максимальна площа для однієї компанії","Кількість компаній або загальна площа за програмою","Кінцевий термін подання заявки"]},
+    {id:"q4", t:"Що саме не оплачується протягом трьох місяців?", type:"radio",
+      opts:["Лише оренда","Оренда та експлуатаційні витрати","Оренда та комунальні послуги"], other:true}
+  ]},
+  {title:"Приміщення та заїзд", qs:[
+    {id:"q5", star:true, t:"Які приміщення доступні і як швидко можна заїхати?", type:"fields",
+      fields:["Готові до заїзду (з ремонтом, з меблями чи без), площі","Під власне оздоблення орендаря (shell & core), площі","Строк від підписання договору до заїзду"]},
+    {id:"q6", t:"Чи включати на лендинг коворкінг і сервісні офіси Regus у будівлі як варіант «почати працювати вже завтра»?", type:"radio",
+      opts:["Так","Ні, лише власна пропозиція Silver Breeze","Потрібно обговорити"]},
+    {id:"q7", t:"Чи надаєте допомогу з переїздом?", type:"check",
+      opts:["Перевізники","Налаштування IT та інтернету","Тимчасове зберігання майна","Ні"], other:true}
+  ]},
+  {title:"Аудиторія, тон і мова", qs:[
+    {id:"q8", t:"Хто основна цільова аудиторія?", hint:"Можна обрати кілька варіантів.", type:"check",
+      opts:["Малий бізнес","IT-компанії","Великі компанії","Громадські та міжнародні організації","Усі перелічені"]},
+    {id:"q9", t:"Мови сторінки", type:"radio", opts:["Лише українська","Українська та англійська"]},
+    {id:"q10", t:"Тон комунікації", type:"radio",
+      opts:["Підтримувальний і спокійний: «ми поруч, щоб ваш бізнес продовжував працювати»","Діловий, комерційний","Поєднання обох"],
+      note:"Наша рекомендація: підтримувальний тон без драматичних образів війни."}
+  ]},
+  {title:"Відгуки та додатково", qs:[
+    {id:"q11", t:"Чи є відгуки орендарів або компанії, які вже переїхали до Silver Breeze?", hint:"Чи можна згадати їх на сторінці (назва, логотип, цитата)?", type:"text"},
+    {id:"extra", t:"Що ще важливо врахувати?", type:"text", unnumbered:true}
+  ]}
+];
+const ALL = SECTIONS.flatMap(s=>s.qs);
+const NUMBERED = ALL.filter(q=>!q.unnumbered);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const KEY = "sb-questionnaire-v1";
+
+/* ---------- render form ---------- */
+const form = document.getElementById("form");
+form.innerHTML = SECTIONS.map((s,si)=>`
+  <section>
+    <h2><span class="n">${String(si+1).padStart(2,"0")}</span>${esc(s.title)}</h2>
+    ${s.qs.map(q=>{
+      const n = q.unnumbered ? "+" : NUMBERED.indexOf(q)+1;
+      let body = "";
+      if(q.type==="check"||q.type==="radio"){
+        const it = q.type==="check"?"checkbox":"radio";
+        body = `<div class="opts">${q.opts.map((o,i)=>`
+          <label class="opt"><input type="${it}" name="${q.id}" id="${q.id}_${i}" value="${esc(o)}"><span>${esc(o)}</span></label>`).join("")}
+          ${q.other?`<label class="opt"><input type="${it}" name="${q.id}" id="${q.id}_other" value="__other"><span class="opt-other">Інше: <input type="text" id="${q.id}_othertext" aria-label="Інше, уточніть"></span></label>`:""}
+        </div>`;
+      } else if(q.type==="fields"){
+        body = `<div class="fields">${q.fields.map((f,i)=>`
+          <label class="f" for="${q.id}_f${i}">${esc(f)}<input type="text" id="${q.id}_f${i}"></label>`).join("")}</div>`;
+      } else {
+        body = `<div class="fields"><textarea id="${q.id}_t" aria-label="${esc(q.t)}"></textarea></div>`;
+      }
+      return `<div class="q">
+        <p class="qt"><span class="num">${n}</span><span>${q.star?'<span class="star">★ </span>':""}${esc(q.t)}</span></p>
+        ${q.hint?`<p class="hint">${esc(q.hint)}</p>`:""}
+        ${body}
+        ${q.note?`<p class="note">${esc(q.note)}</p>`:""}
+      </div>`;
+    }).join("")}
+  </section>`).join("");
+
+/* ---------- read answers ---------- */
+function answers(){
+  return ALL.map(q=>{
+    let a = {q, items:[], text:""};
+    if(q.type==="check"||q.type==="radio"){
+      form.querySelectorAll(`input[name="${q.id}"]`).forEach(el=>{
+        const other = el.value==="__other";
+        const label = other ? "Інше" : el.value;
+        const extra = other && el.checked ? document.getElementById(q.id+"_othertext").value.trim() : "";
+        a.items.push({label, checked:el.checked, extra});
+      });
+    } else if(q.type==="fields"){
+      a.items = q.fields.map((f,i)=>({label:f, value:document.getElementById(`${q.id}_f${i}`).value.trim()}));
+    } else {
+      a.text = document.getElementById(q.id+"_t").value.trim();
+    }
+    a.done = a.items.some(i=>i.checked||i.value) || !!a.text;
+    return a;
+  });
+}
+
+/* ---------- progress + draft ---------- */
+const progress = document.getElementById("progress");
+function update(){
+  const done = answers().filter(a=>!a.q.unnumbered && a.done).length;
+  progress.textContent = `Заповнено ${done} з ${NUMBERED.length} питань`;
+}
+function saveDraft(){
+  try{
+    const d = {};
+    form.querySelectorAll("input,textarea").forEach(el=>{
+      d[el.id] = (el.type==="checkbox"||el.type==="radio") ? el.checked : el.value;
+    });
+    localStorage.setItem(KEY, JSON.stringify(d));
+  }catch(e){}
+}
+function loadDraft(){
+  try{
+    const d = JSON.parse(localStorage.getItem(KEY)||"null");
+    if(!d) return;
+    Object.entries(d).forEach(([id,v])=>{
+      const el = document.getElementById(id); if(!el) return;
+      if(el.type==="checkbox"||el.type==="radio") el.checked = !!v; else el.value = v;
+    });
+  }catch(e){}
+}
+form.addEventListener("input", e=>{
+  if(e.target.id && e.target.id.endsWith("_othertext") && e.target.value.trim()){
+    const box = document.getElementById(e.target.id.replace("_othertext","_other"));
+    if(box) box.checked = true;
+  }
+  update(); saveDraft();
+});
+form.addEventListener("submit", e=>e.preventDefault());
+loadDraft(); update();
+
+/* ---------- plain text (copy) ---------- */
+function asText(){
+  const A = answers();
+  let out = "Опитувальник: лендинг «3 місяці оренди безкоштовно» — БЦ Silver Breeze\n";
+  SECTIONS.forEach((s,si)=>{
+    out += `\n${si+1}. ${s.title.toUpperCase()}\n`;
+    s.qs.forEach(q=>{
+      const a = A.find(x=>x.q===q);
+      const n = q.unnumbered ? "" : (NUMBERED.indexOf(q)+1)+". ";
+      out += `\n${n}${q.t}\n`;
+      if(q.type==="fields") a.items.forEach(i=>out+=`  - ${i.label}: ${i.value||"—"}\n`);
+      else if(q.type==="text") out += `  ${a.text||"—"}\n`;
+      else {
+        const sel = a.items.filter(i=>i.checked).map(i=>i.extra?`${i.label}: ${i.extra}`:i.label);
+        out += `  ${sel.length?sel.join("; "):"—"}\n`;
+      }
+    });
+  });
+  return out;
+}
+
+/* ---------- PDF layout (always light, print-oriented) ---------- */
+function pdfHTML(){
+  const A = answers();
+  const box = on => `<span style="display:inline-block;width:12px;height:12px;border:1.3px solid ${on?"#1E6A85":"#8A99A4"};background:${on?"#1E6A85":"#fff"};border-radius:2px;margin-right:8px;vertical-align:-1px;color:#fff;font-size:10px;line-height:11px;text-align:center">${on?"✓":""}</span>`;
+  const blank = `<span style="color:#9AA7B0">—</span>`;
+  return `<div style="font-family:Onest,Arial,sans-serif;color:#15212B;font-size:11.5px;line-height:1.5;width:700px;background:#fff;padding:4px 2px">
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#1E6A85">БЦ Silver Breeze · Опитувальник для лендингу</div>
+    <div style="font-size:20px;font-weight:700;margin:6px 0 4px">Лендинг «3 місяці оренди безкоштовно»</div>
+    <div style="color:#5A6B77;margin-bottom:14px">Відповіді замовника · сформовано ${new Date().toLocaleDateString("uk-UA")}</div>
+    ${SECTIONS.map((s,si)=>`
+      <div style="font-size:13.5px;font-weight:700;margin:16px 0 6px;padding-bottom:4px;border-bottom:1.5px solid #1E6A85">${si+1}. ${esc(s.title)}</div>
+      ${s.qs.map(q=>{
+        const a = A.find(x=>x.q===q);
+        const n = q.unnumbered ? "" : (NUMBERED.indexOf(q)+1)+". ";
+        let body = "";
+        if(q.type==="fields") body = a.items.map(i=>`<div style="margin:3px 0 3px 16px"><span style="color:#5A6B77">${esc(i.label)}:</span> ${i.value?`<b style="font-weight:600">${esc(i.value)}</b>`:blank}</div>`).join("");
+        else if(q.type==="text") body = `<div style="margin:3px 0 0 16px;white-space:pre-wrap">${a.text?esc(a.text):blank}</div>`;
+        else body = a.items.map(i=>`<div style="margin:3px 0 3px 16px">${box(i.checked)}${esc(i.label)}${i.extra?`: <b style="font-weight:600">${esc(i.extra)}</b>`:""}</div>`).join("");
+        return `<div class="pq" style="padding:8px 0;border-bottom:1px solid #E3E9ED">
+          <div style="font-weight:600;margin-bottom:3px">${n}${q.star?'<span style="color:#A87A22">★ </span>':""}${esc(q.t)}</div>${body}</div>`;
+      }).join("")}`).join("")}
+  </div>`;
+}
+
+/* ---------- buttons ---------- */
+const pdfBtn = document.getElementById("pdfBtn");
+const copyBtn = document.getElementById("copyBtn");
+const statusEl = document.getElementById("status");
+function say(msg, ok){ statusEl.hidden = false; statusEl.textContent = msg; statusEl.classList.toggle("ok", !!ok); }
+
+let downloads = null;
+(async()=>{ try{ downloads = await window.claude?.use?.("downloads"); }catch(e){ downloads = null; } })();
+
+pdfBtn.addEventListener("click", async()=>{
+  if(typeof html2pdf === "undefined"){ say("Не вдалося завантажити модуль PDF. Скористайтеся кнопкою «Копіювати відповіді»."); return; }
+  if(!downloads){ say("Збереження файлів недоступне в цьому перегляді. Скористайтеся кнопкою «Копіювати відповіді» і вставте текст у лист."); return; }
+  pdfBtn.disabled = true; say("Формуємо PDF…");
+  try{
+    const blob = await html2pdf().set({
+      margin:[12,12,14,12],
+      image:{type:"jpeg",quality:0.96},
+      html2canvas:{scale:2,backgroundColor:"#ffffff",useCORS:true},
+      jsPDF:{unit:"mm",format:"a4",orientation:"portrait"},
+      pagebreak:{mode:["css"],avoid:".pq"}
+    }).from(pdfHTML(),"string").outputPdf("blob");
+    await downloads.save({filename:"Silver-Breeze-opytuvalnyk.pdf", data:blob});
+    say("PDF збережено. Надішліть файл нам у відповідь на лист.", true);
+  }catch(e){
+    const code = e && e.code;
+    if(code==="declined") say("Збереження скасовано.");
+    else if(code==="rate_limited") say("Вікно збереження вже відкрите. Спробуйте ще раз за мить.");
+    else say("Не вдалося зберегти PDF. Скористайтеся кнопкою «Копіювати відповіді».");
+  }finally{ pdfBtn.disabled = false; }
+});
+
+copyBtn.addEventListener("click", ()=>{
+  const text = asText();
+  const fallback = ()=>{
+    const ta = document.createElement("textarea");
+    ta.value = text; ta.setAttribute("readonly",""); ta.style.cssText = "position:fixed;left:-9999px";
+    document.body.appendChild(ta); ta.select();
+    let ok = false; try{ ok = document.execCommand("copy"); }catch(e){}
+    ta.remove();
+    say(ok ? "Відповіді скопійовано. Вставте їх у лист." : "Не вдалося скопіювати автоматично. Виділіть відповіді вручну.", ok);
+  };
+  try{
+    navigator.clipboard.writeText(text).then(()=>say("Відповіді скопійовано. Вставте їх у лист.", true), fallback);
+  }catch(e){ fallback(); }
+});
+</script>
+
+</body></html>
